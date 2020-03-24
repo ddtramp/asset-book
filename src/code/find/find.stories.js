@@ -51,8 +51,10 @@ export const BinarySearch = () => {
 
   return (
     <div>
+      <h3>递归方法</h3>
       <CodeMirror value={binarySearchRecursive.toString()} options={Options} />
 
+      <h3>非递归方法</h3>
       <CodeMirror value={binarySearch.toString()} options={Options} />
 
       <code>

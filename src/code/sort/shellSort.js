@@ -1,3 +1,8 @@
+/**
+ * 希尔排序
+ * @param {[]} arr
+ * @return {[]} 
+ */
 const shellSort = (arr) => {
   const len = arr.length
   for(let gap = Math.floor(len / 2); gap > 0; gap = Math.floor(gap / 2)) {

@@ -4,14 +4,15 @@
  * @return {[]} arr
  */
 const quickSort = (arr = []) => {
-  if (arr.length <= 1) {
+  const len = arr.length
+  if (len <= 1) {
       return arr
   }
-  const pivotIndex = Math.floor(arr.length / 2)
+  const pivotIndex = Math.floor(len / 2)
   const pivot = arr.splice(pivotIndex, 1)[0]
   const left = []
   const right = []
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < len; i++) {
       if (arr[i] < pivot) {
           left.push(arr[i])
       } else {

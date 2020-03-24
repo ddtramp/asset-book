@@ -109,9 +109,9 @@ export const InsertionSort = () => {
 
   const sort = () => {
     const data = [...sortData]
-    insertionSort(data)
-    setResult(data)
-    return data
+    const res = insertionSort(data)
+    setResult(res)
+    return res
   }
 
   return (
@@ -310,8 +310,10 @@ export const BucketSort = () => {
 
   return (
     <div>
+      <h3>method 1</h3>
       <CodeMirror value={bucketSort.toString()} options={Options} />
 
+      <h3>method 2</h3>
       <CodeMirror value={bucketSort2.toString()} options={Options} />
 
       <code>

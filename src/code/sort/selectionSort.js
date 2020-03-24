@@ -1,3 +1,8 @@
+/**
+ * 选择排序
+ * @param {[]} arr
+ * @return {[]} 
+ */
 const selectionSort = (arr) => {
   const len = arr.length
   let minIndex
