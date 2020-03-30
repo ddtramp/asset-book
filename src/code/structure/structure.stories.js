@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import { Button } from 'antd'
 // import { linkTo } from '@storybook/addon-links'
 // import { action } from '@storybook/addon-actions'
 import 'antd/dist/antd.css'
@@ -15,6 +16,13 @@ import 'codemirror/theme/ambiance.css'
 import Stack from './Stack'
 import Queue from './Queue'
 
+import LinkedList, { ListNode } from './LinkedList'
+import DoubleLinkedList, { ListNode as DoubleLinkedListNode } from './DoubleLinkedList'
+import CircleLinkedList, { ListNode as CircleLinkedListNode } from './CircleLinkedList'
+
+import Tree from './Tree'
+import BinarySearchTree from './BSTree'
+import AVLTree from './AVLTree'
 
 /* eslint-disable no-unused-expressions */
 
@@ -28,6 +36,7 @@ const Options = {
   lineNumbers: true,                     //显示行号  
   mode: { name: "text/javascript" },          //定义mode  
   readOnly: true,
+  scrollbarStyle: null,
   extraKeys: { "Ctrl": "autocomplete" },   //自动提示配置  
   theme: "ambiance"                  //选中的theme  
 }
@@ -121,6 +130,9 @@ export const StackStories = () => {
   const minstack = new MinStack()
   return (
     <div>
+      <h2>Stack</h2>
+      <CodeMirror value={Stack.toString()} options={Options} />
+      <br/>
       <h2>进制转换</h2>
       <CodeMirror ref={codeMirrorRef} value={Stack.toString()} options={Options} />
 
@@ -304,6 +316,10 @@ export const QueueStories = () => {
   const arr_100 = Array.from({ length: 100 }, (_, i) => i*i);
   return (
     <div>
+      <h2>Queue</h2>
+      <CodeMirror value={Queue.toString()} options={Options} />
+      <br/>
+
       <h3>约瑟夫环（普通模式）</h3>
       <CodeMirror value={delRing.toString()} options={Options} />
 
@@ -332,4 +348,138 @@ export const QueueStories = () => {
 
 QueueStories.story = {
   name: 'Queue 队列'
+}
+
+
+export const LinkedListStories = () => {
+
+  return (
+    <div>    
+      <h3>单向链表</h3>
+
+      <CodeMirror value={`
+${ListNode.toString()}
+${LinkedList.toString()}     
+      `} options={Options} />
+
+    </div>
+  )
+}
+
+LinkedListStories.story = {
+  name: 'LinkedList 单向链表'
+}
+
+export const DoubleLinkedListStories = () => {
+
+  return (
+    <div>
+      <h3>双向链表</h3>
+      <CodeMirror value={`
+${DoubleLinkedListNode.toString()}
+${DoubleLinkedList.toString()}     
+      `} options={Options} />
+    </div>
+  )
+}
+
+DoubleLinkedListStories.story = {
+  name: 'DoubleLinkedList 双向链表'
+}
+
+
+export const CircleLinkedListStories = () => {
+
+  return (
+    <div>
+      <h3>循环链表</h3>
+      <CodeMirror value={`
+${CircleLinkedListNode.toString()}
+${CircleLinkedList.toString()}     
+      `} options={Options} />
+    </div>
+  )
+}
+
+CircleLinkedListStories.story = {
+  name: 'CircleLinkedList List 循环链表'
+}
+
+
+export const TreeStories = () => {
+  const data = {value: 101}
+
+  const tree = useRef(new Tree(data))
+
+  const testContains = () => {
+    tree.current.contains((node) => {
+      console.log(node)
+      if (node.data.value === data.value) {
+        console.log(true)
+      }
+    })
+  }
+
+  const testAdd = () => {
+    tree.current.add({value: 1}, data)
+    console.log(tree)
+  }
+
+  return (
+    <div>
+      <h2>树</h2>
+      <CodeMirror value={Tree.toString()} options={Options} />
+
+      <br/>
+
+      <div>
+        <Button type="default" onClick={testContains}>contains</Button>
+        <Button type="primary" onClick={testAdd} style={{marginLeft: 20}}>add</Button>
+
+      </div>
+    </div>
+  )
+}
+
+TreeStories.story = {
+  name: 'Tree 树'
+}
+
+
+export const BinarySearchTreeStories = () => {
+
+  return (
+    <div>
+      <h2>Binary Search Tree(BST) 二叉树搜索树</h2>
+      <CodeMirror value={BinarySearchTree.toString()} options={Options} />
+      <br/>
+
+      <div>
+        example
+      </div>
+    </div>
+  )
+}
+
+BinarySearchTreeStories.story = {
+  name: 'BSTree 二叉搜索树'
+}
+
+
+export const AVLTreeStories = () => {
+  return (
+    <div>
+      <h2>AVL——Adelson-Velskii-Landi 自平衡二叉搜索树</h2>
+      <CodeMirror value={AVLTree.toString()} options={Options} />
+      <br/>
+
+      <div>
+        example
+      </div>
+    </div>
+  )
+}
+
+AVLTreeStories.story = {
+  name: 'AVL Tree 自平衡二叉搜索树'
 }
