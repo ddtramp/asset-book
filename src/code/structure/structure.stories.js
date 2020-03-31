@@ -24,6 +24,8 @@ import Tree from './Tree'
 import BinarySearchTree from './BSTree'
 import AVLTree from './AVLTree'
 
+import Graph, { Vertex } from './Graph'
+
 /* eslint-disable no-unused-expressions */
 
 `
@@ -473,7 +475,7 @@ export const AVLTreeStories = () => {
       <CodeMirror value={AVLTree.toString()} options={Options} />
       <br/>
 
-      <div>
+      <div> 
         example
       </div>
     </div>
@@ -482,4 +484,68 @@ export const AVLTreeStories = () => {
 
 AVLTreeStories.story = {
   name: 'AVL Tree 自平衡二叉搜索树'
+}
+
+export const GraphStories = () => {
+  const len = 10
+  const graph = new Graph()
+  for (let i = 0; i < len; i++) {
+    const vertex = new Vertex(i)
+    graph.addVertices(vertex)
+  }
+
+  graph.addEdge(graph.vertices[0], graph.vertices[1])
+  graph.addEdge(graph.vertices[0], graph.vertices[2])
+  graph.addEdge(graph.vertices[0], graph.vertices[3])
+  graph.addEdge(graph.vertices[0], graph.vertices[4])
+  graph.addEdge(graph.vertices[1], graph.vertices[2])
+  graph.addEdge(graph.vertices[9], graph.vertices[4])
+  graph.addEdge(graph.vertices[6], graph.vertices[4])
+  graph.addEdge(graph.vertices[8], graph.vertices[9])
+  graph.addEdge(graph.vertices[9], graph.vertices[3])
+
+  console.log('vertices', graph.vertices)
+  console.log('BFS', graph.BFS(graph.vertices[0]))
+  console.log('DFS', graph.DFS())
+
+  console.table('shortestPath', graph.shortestPath(graph.vertices[5], graph.vertices[8]))
+
+  console.table('shortestPathAll', graph.shortestPathAll())
+
+
+  //重新声明一个图并所有的顶点加入图中。
+  const DFSGraph = new Graph()
+  const DFSarray = ["a","b","c","d","e","f"];
+  for (var i = 0; i < DFSarray.length; i++) {
+      DFSGraph.addVertices(DFSarray[i])
+  }
+  //我们为图加上边。
+  DFSGraph.addEdge("a","c")
+  DFSGraph.addEdge("a","d")
+  DFSGraph.addEdge("b","d")
+  DFSGraph.addEdge("b","e")
+  DFSGraph.addEdge("c","f")
+  DFSGraph.addEdge("f","e")
+  const result = DFSGraph.DFS()
+  console.log('拓扑排序', result)
+
+  return (
+    <div>
+      <h2>图和图算法</h2>
+      <CodeMirror value={ `
+${Vertex.toString()}
+${Graph.toString()}
+         `} options={Options} />
+
+      <br/>
+
+      <div>
+        example
+      </div>
+    </div>
+  )
+}
+
+GraphStories.story = {
+  name: 'Graph 图'
 }
